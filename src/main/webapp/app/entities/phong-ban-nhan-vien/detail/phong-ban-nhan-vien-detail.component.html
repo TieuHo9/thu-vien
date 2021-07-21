@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="phongBanNhanVien">
+      <h2 data-cy="phongBanNhanVienDetailsHeading"><span>Phong Ban Nhan Vien</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ phongBanNhanVien.id }}</span>
+        </dd>
+        <dt><span>Ma Phong</span></dt>
+        <dd>
+          <span>{{ phongBanNhanVien.maPhong }}</span>
+        </dd>
+        <dt><span>Ma Nhan Vien</span></dt>
+        <dd>
+          <span>{{ phongBanNhanVien.maNhanVien }}</span>
+        </dd>
+        <dt><span>Nvien</span></dt>
+        <dd>
+          <span *ngFor="let nvien of phongBanNhanVien.nviens; let last = last">
+            <a [routerLink]="['/nhan-vien', nvien?.id, 'view']">{{ nvien.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/phong-ban-nhan-vien', phongBanNhanVien.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

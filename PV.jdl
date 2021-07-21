@@ -1,0 +1,84 @@
+
+entity ChuyenCongTac {
+	maChuyenDi String,
+    tenChuyenDi String,
+    thoiGianTu LocalDate,
+    thoiGianDen LocalDate,
+    maNhanVien String, //nguoi dai dien
+    tenNhanVien String, // ten nguoi dai dien
+    soDienThoai String,
+    diaDiem String,
+    soTien String,
+}
+
+entity NhanVien {
+	maNhanVien String,
+	tenNhanVien String,
+    phongBan String,
+    capBac String,
+    
+}
+
+entity NhanVienCongTac{
+	maNhanVien String,
+    maChuyenDi String,
+    soTien String,
+}
+
+entity PhongBanNhanVien{
+	maPhong String,
+    maNhanVien String,
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity PhongBan {
+	maPhong String,
+	tenPhong String,
+}
+
+entity ChiPhi {
+	loaiChiPhi String,
+    soTien String,//han muc
+    donViTienTe String,
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity DinhMuc {
+	maMuc String,
+	loaiPhi String,
+    soTien String,
+    capBac String,
+ 
+}
+
+entity DeXuatThanhToan{
+	maDeXuat String,
+    tenDeXuat String,
+    tuNgay LocalDate,
+    denNgay LocalDate,
+    trangThaiTruongPhong String,
+    trangThaiPhongTaiVu String,
+    trangThaiBanLanhDao String,
+}
+
+entity CapBac{
+	tenCap String,
+    
+}
+
+relationship ManyToMany {
+	ChuyenCongTac{nhanvien} to NhanVien{chuyencongtac},
+    DeXuatThanhToan{chiphi} to ChiPhi{dexuat},
+    DeXuatThanhToan{dmuc} to DinhMuc{dxuattt}
+    NhanVien{phongban} to PhongBan{nhanv},
+    NhanVien{capbac} to CapBac{nv},
+    NhanVienCongTac{chuyenct} to ChuyenCongTac{nhanvienct},
+    PhongBanNhanVien{nvien} to NhanVien{pban},
+    DinhMuc{cbac} to CapBac{muc}
+    
+    
+}

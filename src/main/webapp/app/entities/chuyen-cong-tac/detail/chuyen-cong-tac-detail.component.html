@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chuyenCongTac">
+      <h2 data-cy="chuyenCongTacDetailsHeading"><span>Chuyen Cong Tac</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.id }}</span>
+        </dd>
+        <dt><span>Ma Chuyen Di</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.maChuyenDi }}</span>
+        </dd>
+        <dt><span>Ten Chuyen Di</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.tenChuyenDi }}</span>
+        </dd>
+        <dt><span>Thoi Gian Tu</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.thoiGianTu | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Thoi Gian Den</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.thoiGianDen | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Ma Nhan Vien</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.maNhanVien }}</span>
+        </dd>
+        <dt><span>Ten Nhan Vien</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.tenNhanVien }}</span>
+        </dd>
+        <dt><span>So Dien Thoai</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.soDienThoai }}</span>
+        </dd>
+        <dt><span>Dia Diem</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.diaDiem }}</span>
+        </dd>
+        <dt><span>So Tien</span></dt>
+        <dd>
+          <span>{{ chuyenCongTac.soTien }}</span>
+        </dd>
+        <dt><span>Nhanvien</span></dt>
+        <dd>
+          <span *ngFor="let nhanvien of chuyenCongTac.nhanviens; let last = last">
+            <a [routerLink]="['/nhan-vien', nhanvien?.id, 'view']">{{ nhanvien.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chuyen-cong-tac', chuyenCongTac.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

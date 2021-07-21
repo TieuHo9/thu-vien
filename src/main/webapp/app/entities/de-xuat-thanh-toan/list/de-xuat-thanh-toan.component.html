@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="DeXuatThanhToanHeading">
+    <span>Đề xuất thanh toán</span>
+    <br />
+    <br />
+    <div class="col-md-4">
+      <div class="input-group">
+        <input #dataSearch class="form-control ng-pristine ng-valid ng-touched" placeholder="Tìm kiếm theo tên đề xuất" type="text" />
+        <button class="btn btn-info mr-2" (click)="searchbyname(dataSearch.value)">Tìm kiếm</button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="exportThanhToan()" [disabled]="isLoading" *jhiHasAnyAuthority="'ROLE_OFFICE'">
+        <fa-icon icon="check" [spin]="isLoading"></fa-icon>
+        <span>Xuất báo cáo đã thanh toán</span>
+      </button>
+
+      <button class="btn btn-info mr-2" (click)="export()" [disabled]="isLoading">
+        <fa-icon icon="check" [spin]="isLoading"></fa-icon>
+        <span>Xuất tất cả báo cáo</span>
+      </button>
+
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-de-xuat-thanh-toan"
+        [routerLink]="['/de-xuat-thanh-toan/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Thêm mới đề xuất thanh toán </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="deXuatThanhToans?.length === 0">
+    <span>Không tồn tại đề xuất thanh toán</span>
+  </div>
+
+  <div class="table table-bordered table-customize table-responsive" id="entities" *ngIf="deXuatThanhToans && deXuatThanhToans.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Mã đề xuất</span></th>
+          <th scope="col"><span>Tên đề xuất</span></th>
+          <th scope="col"><span>Từ ngày</span></th>
+          <th scope="col"><span>Đến ngày</span></th>
+          <th scope="col"><span>Trạng thái xác nhận trưởng phòng</span></th>
+          <th scope="col"><span>Trạng thái xác nhận phòng tài vụ</span></th>
+          <th scope="col"><span>Trạng thái xác nhận ban giám đốc</span></th>
+          <th scope="col"><span>Chi phí</span></th>
+          <th scope="col"><span>Định mức</span></th>
+          <th scope="col"><span>Trạng thái thanh toán</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deXuatThanhToan of deXuatThanhToans; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/de-xuat-thanh-toan', deXuatThanhToan.id, 'view']">{{ deXuatThanhToan.id }}</a>
+          </td>
+          <td>{{ deXuatThanhToan.maDeXuat }}</td>
+          <td>{{ deXuatThanhToan.tenDeXuat }}</td>
+          <td>{{ deXuatThanhToan.tuNgay | formatMediumDate }}</td>
+          <td>{{ deXuatThanhToan.denNgay | formatMediumDate }}</td>
+          <td>{{ deXuatThanhToan.trangThaiTruongPhong }}</td>
+          <td>{{ deXuatThanhToan.trangThaiPhongTaiVu }}</td>
+          <td>{{ deXuatThanhToan.trangThaiBanLanhDao }}</td>
+          <td>
+            <span *ngFor="let chiphi of deXuatThanhToan.chiphis; let last = last">
+              <a class="form-control-static" [routerLink]="['/chi-phi', chiphi.id, 'view']">{{ chiphi.loaiChiPhi }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let dmuc of deXuatThanhToan.dmucs; let last = last">
+              <a class="form-control-static" [routerLink]="['/dinh-muc', dmuc.id, 'view']">{{ dmuc.capBac }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>{{ deXuatThanhToan.thanhToan === 'Da thanh toan' ? 'Da thanh toan ' : 'Chua thanh toan' }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/de-xuat-thanh-toan', deXuatThanhToan.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/de-xuat-thanh-toan', deXuatThanhToan.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(deXuatThanhToan)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chiPhi">
+      <h2 data-cy="chiPhiDetailsHeading"><span>Chi Phi</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ chiPhi.id }}</span>
+        </dd>
+        <dt><span>Loai Chi Phi</span></dt>
+        <dd>
+          <span>{{ chiPhi.loaiChiPhi }}</span>
+        </dd>
+        <dt><span>So Tien</span></dt>
+        <dd>
+          <span>{{ chiPhi.soTien }}</span>
+        </dd>
+        <dt><span>Don Vi Tien Te</span></dt>
+        <dd>
+          <span>{{ chiPhi.donViTienTe }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chi-phi', chiPhi.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

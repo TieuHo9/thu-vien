@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ChiPhi.
+    -->
+    <changeSet id="20210326165121-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dexuat_id"
+                                 baseTableName="chi_phi"
+                                 constraintName="fk_chi_phi__dexuat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="de_xuat_thanh_toan"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity DeXuatThanhToan.
+    -->
+    <changeSet id="20210326165123-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="de_xuat_thanh_toan_id"
+                                 baseTableName="rel_de_xuat_thanh_toan__chiphi"
+                                 constraintName="fk_rel_de_xuat_thanh_toan__chiphi__de_xuat_thanh_toan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="de_xuat_thanh_toan"/>
+
+        <addForeignKeyConstraint baseColumnNames="chiphi_id"
+                                 baseTableName="rel_de_xuat_thanh_toan__chiphi"
+                                 constraintName="fk_rel_de_xuat_thanh_toan__chiphi__chiphi_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chi_phi"/>
+        
+        <addForeignKeyConstraint baseColumnNames="de_xuat_thanh_toan_id"
+                                 baseTableName="rel_de_xuat_thanh_toan__dmuc"
+                                 constraintName="fk_rel_de_xuat_thanh_toan__dmuc__de_xuat_thanh_toan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="de_xuat_thanh_toan"/>
+
+        <addForeignKeyConstraint baseColumnNames="dmuc_id"
+                                 baseTableName="rel_de_xuat_thanh_toan__dmuc"
+                                 constraintName="fk_rel_de_xuat_thanh_toan__dmuc__dmuc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dinh_muc"/>
+        
+    </changeSet>
+</databaseChangeLog>

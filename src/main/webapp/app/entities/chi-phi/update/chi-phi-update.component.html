@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-chi-phi-heading" data-cy="ChiPhiCreateUpdateHeading">Thêm mới hoặc sửa chi phí</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_loaiChiPhi">Loại chi phí</label>
+          <input
+            type="text"
+            class="form-control"
+            name="loaiChiPhi"
+            id="field_loaiChiPhi"
+            data-cy="loaiChiPhi"
+            formControlName="loaiChiPhi"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_soTien">Số tiền</label>
+          <input type="text" class="form-control" name="soTien" id="field_soTien" data-cy="soTien" formControlName="soTien" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_donViTienTe">Đơn vị tiền tệ</label>
+          <input
+            type="text"
+            class="form-control"
+            name="donViTienTe"
+            id="field_donViTienTe"
+            data-cy="donViTienTe"
+            formControlName="donViTienTe"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

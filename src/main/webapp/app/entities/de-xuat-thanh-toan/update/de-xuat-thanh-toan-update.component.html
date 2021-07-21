@@ -1,0 +1,118 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-de-xuat-thanh-toan-heading" data-cy="DeXuatThanhToanCreateUpdateHeading">Thêm mới hoặc sửa đề xuất thanh toán</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maDeXuat">Mã đề xuất</label>
+          <input type="text" class="form-control" name="maDeXuat" id="field_maDeXuat" data-cy="maDeXuat" formControlName="maDeXuat" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tenDeXuat">Tên đề xuất</label>
+          <input type="text" class="form-control" name="tenDeXuat" id="field_tenDeXuat" data-cy="tenDeXuat" formControlName="tenDeXuat" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tuNgay">Từ ngày</label>
+          <div class="input-group">
+            <input
+              id="field_tuNgay"
+              data-cy="tuNgay"
+              type="text"
+              class="form-control"
+              name="tuNgay"
+              ngbDatepicker
+              #tuNgayDp="ngbDatepicker"
+              formControlName="tuNgay"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="tuNgayDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_denNgay">Đến ngày</label>
+          <div class="input-group">
+            <input
+              id="field_denNgay"
+              data-cy="denNgay"
+              type="text"
+              class="form-control"
+              name="denNgay"
+              ngbDatepicker
+              #denNgayDp="ngbDatepicker"
+              formControlName="denNgay"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="denNgayDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tenDeXuat">Trạng thái thanh toán</label>
+          <!-- <input type="text" class="form-control" name="thanhToan" id="field_thanhToan" data-cy="thanhToan"
+            formControlName="thanhToan" /> -->
+          <select name="selectedPayment" id="aantal" class="form-control" formControlName="thanhToan">
+            <option value="" disabled selected>Please select</option>
+            <option *ngFor="let option of payments" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="field_chiphis">Chi phí</label>
+          <select class="form-control" id="field_chiphis" data-cy="chiphi" multiple name="chiphis" formControlName="chiphis">
+            <option
+              [ngValue]="getSelectedChiPhi(chiPhiOption, editForm.get('chiphis')!.value)"
+              *ngFor="let chiPhiOption of chiPhisSharedCollection; trackBy: trackChiPhiById"
+            >
+              {{ chiPhiOption.loaiChiPhi }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="field_dmucs">Định mức</label>
+          <select class="form-control" id="field_dmucs" data-cy="dmuc" multiple name="dmucs" formControlName="dmucs">
+            <option
+              [ngValue]="getSelectedDinhMuc(dinhMucOption, editForm.get('dmucs')!.value)"
+              *ngFor="let dinhMucOption of dinhMucsSharedCollection; trackBy: trackDinhMucById"
+            >
+              {{ dinhMucOption.capBac }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

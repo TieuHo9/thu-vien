@@ -1,0 +1,67 @@
+{
+  "name": "ChuyenCongTac",
+  "fields": [
+    {
+      "fieldName": "maChuyenDi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenChuyenDi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thoiGianTu",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "thoiGianDen",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "maNhanVien",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenNhanVien",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "soDienThoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diaDiem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "soTien",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "nhanVien",
+      "otherEntityRelationshipName": "chuyencongtac",
+      "relationshipName": "nhanvien",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "nhanVienCongTac",
+      "otherEntityRelationshipName": "chuyenct",
+      "relationshipName": "nhanvienct",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "chuyen_cong_tac",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210326165116"
+}

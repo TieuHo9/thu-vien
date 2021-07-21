@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-dinh-muc-heading" data-cy="DinhMucCreateUpdateHeading">Thêm mới hoặc sửa định mức</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maMuc">Đơn vị chi phí</label>
+          <input type="text" class="form-control" name="maMuc" id="field_maMuc" data-cy="maMuc" formControlName="maMuc" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_loaiPhi">Loại phí</label>
+          <input type="text" class="form-control" name="loaiPhi" id="field_loaiPhi" data-cy="loaiPhi" formControlName="loaiPhi" />
+        </div>
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_soTien">Số tiền</label>
+          <input type="text" class="form-control" name="soTien" id="field_soTien" data-cy="soTien" formControlName="soTien" />
+        </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_capBac">Số tiền</label>
+          <input type="text" class="form-control" name="capBac" id="field_capBac" data-cy="capBac" formControlName="capBac" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_cbacs">Cấp bậc được hưởng</label>
+          <select class="form-control" id="field_cbacs" data-cy="cbac" multiple name="cbacs" formControlName="cbacs">
+            <option
+              [ngValue]="getSelectedCapBac(capBacOption, editForm.get('cbacs')!.value)"
+              *ngFor="let capBacOption of capBacsSharedCollection; trackBy: trackCapBacById"
+            >
+              {{ capBacOption.tenCap }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-nhan-vien-heading" data-cy="NhanVienCreateUpdateHeading">Thêm hoặc sửa thông tin nhân viên</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maNhanVien">Mã nhân viên</label>
+          <input
+            type="text"
+            class="form-control"
+            name="maNhanVien"
+            id="field_maNhanVien"
+            data-cy="maNhanVien"
+            formControlName="maNhanVien"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tenNhanVien">Tên nhân viên</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tenNhanVien"
+            id="field_tenNhanVien"
+            data-cy="tenNhanVien"
+            formControlName="tenNhanVien"
+          />
+        </div>
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_phongBan">Phong Ban</label>
+          <input type="text" class="form-control" name="phongBan" id="field_phongBan" data-cy="phongBan" formControlName="phongBan" />
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_capBac">Cap Bac</label>
+          <input type="text" class="form-control" name="capBac" id="field_capBac" data-cy="capBac" formControlName="capBac" />
+        </div> -->
+
+        <div class="form-group">
+          <label for="field_phongbans">Phòng ban</label>
+          <select class="form-control" id="field_phongbans" data-cy="phongban" multiple name="phongbans" formControlName="phongbans">
+            <option
+              [ngValue]="getSelectedPhongBan(phongBanOption, editForm.get('phongbans')!.value)"
+              *ngFor="let phongBanOption of phongBansSharedCollection; trackBy: trackPhongBanById"
+            >
+              {{ phongBanOption.tenPhong }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="field_capbacs">Cấp bậc</label>
+          <select class="form-control" id="field_capbacs" data-cy="capbac" multiple name="capbacs" formControlName="capbacs">
+            <option
+              [ngValue]="getSelectedCapBac(capBacOption, editForm.get('capbacs')!.value)"
+              *ngFor="let capBacOption of capBacsSharedCollection; trackBy: trackCapBacById"
+            >
+              {{ capBacOption.tenCap }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

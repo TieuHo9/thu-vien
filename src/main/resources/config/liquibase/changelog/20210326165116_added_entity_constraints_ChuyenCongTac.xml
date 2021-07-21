@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ChuyenCongTac.
+    -->
+    <changeSet id="20210326165116-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="chuyen_cong_tac_id"
+                                 baseTableName="rel_chuyen_cong_tac__nhanvien"
+                                 constraintName="fk_rel_chuyen_cong_tac__nhanvien__chuyen_cong_tac_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chuyen_cong_tac"/>
+
+        <addForeignKeyConstraint baseColumnNames="nhanvien_id"
+                                 baseTableName="rel_chuyen_cong_tac__nhanvien"
+                                 constraintName="fk_rel_chuyen_cong_tac__nhanvien__nhanvien_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nhan_vien"/>
+        
+    </changeSet>
+</databaseChangeLog>

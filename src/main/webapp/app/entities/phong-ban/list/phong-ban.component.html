@@ -1,0 +1,80 @@
+<div>
+  <h2 id="page-heading" data-cy="PhongBanHeading">
+    <span>Phòng ban</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-phong-ban"
+        [routerLink]="['/phong-ban/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Thêm mới phòng ban </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="phongBans?.length === 0">
+    <span>Không tìm thấy phòng ban </span>
+  </div>
+
+  <div class="table table-bordered table-customize table-responsive" id="entities" *ngIf="phongBans && phongBans.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Cấp trên</span></th>
+          <th scope="col"><span>Tên phòng</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let phongBan of phongBans; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/phong-ban', phongBan.id, 'view']">{{ phongBan.id }}</a>
+          </td>
+          <td>{{ phongBan.maPhong }}</td>
+          <td>{{ phongBan.tenPhong }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/phong-ban', phongBan.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/phong-ban', phongBan.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(phongBan)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

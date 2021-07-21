@@ -1,0 +1,59 @@
+{
+  "name": "DeXuatThanhToan",
+  "fields": [
+    {
+      "fieldName": "maDeXuat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenDeXuat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tuNgay",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "denNgay",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "trangThaiTruongPhong",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThaiPhongTaiVu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "trangThaiBanLanhDao",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "chiPhi",
+      "otherEntityRelationshipName": "dexuat",
+      "relationshipName": "chiphi",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dinhMuc",
+      "otherEntityRelationshipName": "dxuattt",
+      "relationshipName": "dmuc",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "de_xuat_thanh_toan",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210326165123"
+}

@@ -1,0 +1,98 @@
+<div>
+  <h2 id="page-heading" data-cy="NhanVienHeading">
+    <span>Nhân viên</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-nhan-vien"
+        [routerLink]="['/nhan-vien/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Thêm mới nhân viên </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="nhanViens?.length === 0">
+    <span>Không tồn tại nhân viên</span>
+  </div>
+
+  <div class="table table-bordered table-customize table-responsive" id="entities" *ngIf="nhanViens && nhanViens.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Mã nhân viên</span></th>
+          <th scope="col"><span>Tên nhân viên</span></th>
+          <!-- <th scope="col"><span>Phòng ban</span></th> -->
+          <!-- <th scope="col"><span>Cấp bậc</span></th> -->
+          <th scope="col"><span>Phòng ban</span></th>
+          <th scope="col"><span>Cấp bậc</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nhanVien of nhanViens; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/nhan-vien', nhanVien.id, 'view']">{{ nhanVien.id }}</a>
+          </td>
+          <td>{{ nhanVien.maNhanVien }}</td>
+          <td>{{ nhanVien.tenNhanVien }}</td>
+          <!-- <td>{{ nhanVien.phongBan }}</td> -->
+          <!-- <td>{{ nhanVien.capBac }}</td> -->
+          <td>
+            <span *ngFor="let phongban of nhanVien.phongbans; let last = last">
+              <a class="form-control-static" [routerLink]="['/phong-ban', phongban.id, 'view']">{{ phongban.tenPhong }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let capbac of nhanVien.capbacs; let last = last">
+              <a class="form-control-static" [routerLink]="['/cap-bac', capbac.id, 'view']">{{ capbac.tenCap }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/nhan-vien', nhanVien.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/nhan-vien', nhanVien.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(nhanVien)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

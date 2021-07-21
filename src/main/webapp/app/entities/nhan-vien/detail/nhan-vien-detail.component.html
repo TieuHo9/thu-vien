@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="nhanVien">
+      <h2 data-cy="nhanVienDetailsHeading"><span>Nhan Vien</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ nhanVien.id }}</span>
+        </dd>
+        <dt><span>Ma Nhan Vien</span></dt>
+        <dd>
+          <span>{{ nhanVien.maNhanVien }}</span>
+        </dd>
+        <dt><span>Ten Nhan Vien</span></dt>
+        <dd>
+          <span>{{ nhanVien.tenNhanVien }}</span>
+        </dd>
+        <dt><span>Phong Ban</span></dt>
+        <dd>
+          <span>{{ nhanVien.phongBan }}</span>
+        </dd>
+        <dt><span>Cap Bac</span></dt>
+        <dd>
+          <span>{{ nhanVien.capBac }}</span>
+        </dd>
+        <dt><span>Phongban</span></dt>
+        <dd>
+          <span *ngFor="let phongban of nhanVien.phongbans; let last = last">
+            <a [routerLink]="['/phong-ban', phongban?.id, 'view']">{{ phongban.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Capbac</span></dt>
+        <dd>
+          <span *ngFor="let capbac of nhanVien.capbacs; let last = last">
+            <a [routerLink]="['/cap-bac', capbac?.id, 'view']">{{ capbac.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nhan-vien', nhanVien.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

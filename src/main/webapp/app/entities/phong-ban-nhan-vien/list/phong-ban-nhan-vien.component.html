@@ -1,0 +1,91 @@
+<div>
+  <h2 id="page-heading" data-cy="PhongBanNhanVienHeading">
+    <span>Danh sách nhân viên trong các phòng ban </span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-phong-ban-nhan-vien"
+        [routerLink]="['/phong-ban-nhan-vien/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Thêm mới phòng ban gồm những nhân viên nào </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="phongBanNhanViens?.length === 0">
+    <span>Không tồn tại</span>
+  </div>
+
+  <div
+    class="table table-bordered table-customize table-responsive"
+    id="entities"
+    *ngIf="phongBanNhanViens && phongBanNhanViens.length > 0"
+  >
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Mã phòng</span></th>
+          <th scope="col"><span>Mã nhân viên trưởng bộ phận</span></th>
+          <th scope="col"><span>Nhân viên trong phòng</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let phongBanNhanVien of phongBanNhanViens; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/phong-ban-nhan-vien', phongBanNhanVien.id, 'view']">{{ phongBanNhanVien.id }}</a>
+          </td>
+          <td>{{ phongBanNhanVien.maPhong }}</td>
+          <td>{{ phongBanNhanVien.maNhanVien }}</td>
+          <td>
+            <span *ngFor="let nvien of phongBanNhanVien.nviens; let last = last">
+              <a class="form-control-static" [routerLink]="['/nhan-vien', nvien.id, 'view']">{{ nvien.tenNhanVien }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/phong-ban-nhan-vien', phongBanNhanVien.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/phong-ban-nhan-vien', phongBanNhanVien.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(phongBanNhanVien)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

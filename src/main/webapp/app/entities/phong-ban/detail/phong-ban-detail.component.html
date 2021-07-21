@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="phongBan">
+      <h2 data-cy="phongBanDetailsHeading"><span>Phong Ban</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ phongBan.id }}</span>
+        </dd>
+        <dt><span>Cap tren</span></dt>
+        <dd>
+          <span>{{ phongBan.maPhong }}</span>
+        </dd>
+        <dt><span>Ten Phong</span></dt>
+        <dd>
+          <span>{{ phongBan.tenPhong }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/phong-ban', phongBan.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

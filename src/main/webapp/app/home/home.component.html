@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-3">
+    <span class="hipster img-fluid rounded"></span>
+  </div>
+
+  <div class="col-md-9">
+    <h1 class="display-4">Quản lý công tác TLU</h1>
+
+    <div [ngSwitch]="isAuthenticated()">
+      <div class="alert alert-success" *ngSwitchCase="true">
+        <span id="home-logged-message" *ngIf="account">Bạn đang login với account "{{ account.login }}".</span>
+      </div>
+
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span>Nếu bạn chưa đăng nhập </span>
+        <a class="alert-link" (click)="login()">hãy click vào đây</a>
+      </div>
+
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span>Bạn chưa có tài khoản?</span>&nbsp;
+        <a class="alert-link" routerLink="account/register">Tạo mới tài khoản</a>
+      </div>
+    </div>
+  </div>
+</div>

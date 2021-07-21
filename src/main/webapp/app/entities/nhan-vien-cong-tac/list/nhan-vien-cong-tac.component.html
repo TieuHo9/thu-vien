@@ -1,0 +1,89 @@
+<div>
+  <h2 id="page-heading" data-cy="NhanVienCongTacHeading">
+    <span>Đợt công tác của nhân viên</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-nhan-vien-cong-tac"
+        [routerLink]="['/nhan-vien-cong-tac/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Thêm mới đợt công tác của nhân viên </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="nhanVienCongTacs?.length === 0">
+    <span>Không có đợt công tác nào tồn tại</span>
+  </div>
+
+  <div class="table table-bordered table-customize table-responsive" id="entities" *ngIf="nhanVienCongTacs && nhanVienCongTacs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Mã nhân viên</span></th>
+          <th scope="col"><span>Mã chuyến đi</span></th>
+          <th scope="col"><span>Số tiền</span></th>
+          <th scope="col"><span>Chi tiết chuyến công tác</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nhanVienCongTac of nhanVienCongTacs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/nhan-vien-cong-tac', nhanVienCongTac.id, 'view']">{{ nhanVienCongTac.id }}</a>
+          </td>
+          <td>{{ nhanVienCongTac.maNhanVien }}</td>
+          <td>{{ nhanVienCongTac.maChuyenDi }}</td>
+          <td>{{ nhanVienCongTac.soTien }}</td>
+          <td>
+            <span *ngFor="let chuyenct of nhanVienCongTac.chuyencts; let last = last">
+              <a class="form-control-static" [routerLink]="['/chuyen-cong-tac', chuyenct.id, 'view']">{{ chuyenct.tenChuyenDi }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/nhan-vien-cong-tac', nhanVienCongTac.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/nhan-vien-cong-tac', nhanVienCongTac.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(nhanVienCongTac)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

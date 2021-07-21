@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="ChuyenCongTacHeading">
+    <span>Chuyến công tác</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chuyen-cong-tac"
+        [routerLink]="['/chuyen-cong-tac/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Thêm mới chuyến công tác</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="chuyenCongTacs?.length === 0">
+    <span>Không tồn tại chuyến công tác nào</span>
+  </div>
+
+  <div class="table table-bordered table-customize table-responsive" id="entities" *ngIf="chuyenCongTacs && chuyenCongTacs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Mã chuyến đi</span></th>
+          <th scope="col"><span>Tên chuyến đi</span></th>
+          <th scope="col"><span>Thời gian từ</span></th>
+          <th scope="col"><span>Thời gian đến</span></th>
+          <th scope="col"><span>Nhân viên đại diện</span></th>
+          <th scope="col"><span>Tên nhân viên</span></th>
+          <th scope="col"><span>Số điện thoại</span></th>
+          <th scope="col"><span>Địa điểm</span></th>
+          <th scope="col"><span>Số tiền</span></th>
+          <th scope="col"><span>Nhân viên đi công tác</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chuyenCongTac of chuyenCongTacs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chuyen-cong-tac', chuyenCongTac.id, 'view']">{{ chuyenCongTac.id }}</a>
+          </td>
+          <td>{{ chuyenCongTac.maChuyenDi }}</td>
+          <td>{{ chuyenCongTac.tenChuyenDi }}</td>
+          <td>{{ chuyenCongTac.thoiGianTu | formatMediumDate }}</td>
+          <td>{{ chuyenCongTac.thoiGianDen | formatMediumDate }}</td>
+          <td>{{ chuyenCongTac.maNhanVien }}</td>
+          <td>{{ chuyenCongTac.tenNhanVien }}</td>
+          <td>{{ chuyenCongTac.soDienThoai }}</td>
+          <td>{{ chuyenCongTac.diaDiem }}</td>
+          <td>{{ chuyenCongTac.soTien }}</td>
+          <td>
+            <span *ngFor="let nhanvien of chuyenCongTac.nhanviens; let last = last">
+              <a class="form-control-static" [routerLink]="['/nhan-vien', nhanvien.id, 'view']">{{ nhanvien.tenNhanVien }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/chuyen-cong-tac', chuyenCongTac.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/chuyen-cong-tac', chuyenCongTac.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(chuyenCongTac)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

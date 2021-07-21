@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity NhanVien.
+    -->
+    <changeSet id="20210326165117-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="nhan_vien_id"
+                                 baseTableName="rel_nhan_vien__phongban"
+                                 constraintName="fk_rel_nhan_vien__phongban__nhan_vien_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nhan_vien"/>
+
+        <addForeignKeyConstraint baseColumnNames="phongban_id"
+                                 baseTableName="rel_nhan_vien__phongban"
+                                 constraintName="fk_rel_nhan_vien__phongban__phongban_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="phong_ban"/>
+        
+        <addForeignKeyConstraint baseColumnNames="nhan_vien_id"
+                                 baseTableName="rel_nhan_vien__capbac"
+                                 constraintName="fk_rel_nhan_vien__capbac__nhan_vien_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nhan_vien"/>
+
+        <addForeignKeyConstraint baseColumnNames="capbac_id"
+                                 baseTableName="rel_nhan_vien__capbac"
+                                 constraintName="fk_rel_nhan_vien__capbac__capbac_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cap_bac"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,156 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-chuyen-cong-tac-heading" data-cy="ChuyenCongTacCreateUpdateHeading">Thêm mới hoặc sửa chuyến công tác</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maChuyenDi">Mã chuyến đi</label>
+          <input
+            type="text"
+            class="form-control"
+            name="maChuyenDi"
+            id="field_maChuyenDi"
+            data-cy="maChuyenDi"
+            formControlName="maChuyenDi"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tenChuyenDi">Tên chuyến đi</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tenChuyenDi"
+            id="field_tenChuyenDi"
+            data-cy="tenChuyenDi"
+            formControlName="tenChuyenDi"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_thoiGianTu">Từ ngày</label>
+          <div class="input-group">
+            <input
+              id="field_thoiGianTu"
+              data-cy="thoiGianTu"
+              type="text"
+              class="form-control"
+              name="thoiGianTu"
+              ngbDatepicker
+              #thoiGianTuDp="ngbDatepicker"
+              formControlName="thoiGianTu"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="thoiGianTuDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_thoiGianDen">Đến ngày</label>
+          <div class="input-group">
+            <input
+              id="field_thoiGianDen"
+              data-cy="thoiGianDen"
+              type="text"
+              class="form-control"
+              name="thoiGianDen"
+              ngbDatepicker
+              #thoiGianDenDp="ngbDatepicker"
+              formControlName="thoiGianDen"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="thoiGianDenDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maNhanVien">Mã nhân viên đại diện</label>
+          <input
+            type="text"
+            class="form-control"
+            name="maNhanVien"
+            id="field_maNhanVien"
+            data-cy="maNhanVien"
+            formControlName="maNhanVien"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tenNhanVien">Tên nhân viên đại diện</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tenNhanVien"
+            id="field_tenNhanVien"
+            data-cy="tenNhanVien"
+            formControlName="tenNhanVien"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_soDienThoai">Số điện thoại nhân viên đại diện</label>
+          <input
+            type="text"
+            class="form-control"
+            name="soDienThoai"
+            id="field_soDienThoai"
+            data-cy="soDienThoai"
+            formControlName="soDienThoai"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_diaDiem">Địa điểm công tác</label>
+          <input type="text" class="form-control" name="diaDiem" id="field_diaDiem" data-cy="diaDiem" formControlName="diaDiem" />
+        </div>
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_soTien">Số tiền</label>
+          <input type="text" class="form-control" name="soTien" id="field_soTien" data-cy="soTien" formControlName="soTien" />
+        </div> -->
+
+        <div class="form-group">
+          <label for="field_nhanviens">Nhân viên công tác</label>
+          <select class="form-control" id="field_nhanviens" data-cy="nhanvien" multiple name="nhanviens" formControlName="nhanviens">
+            <option
+              [ngValue]="getSelectedNhanVien(nhanVienOption, editForm.get('nhanviens')!.value)"
+              *ngFor="let nhanVienOption of nhanViensSharedCollection; trackBy: trackNhanVienById"
+            >
+              {{ nhanVienOption.tenNhanVien }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

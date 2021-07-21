@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="deXuatThanhToan">
+      <h2 data-cy="deXuatThanhToanDetailsHeading"><span>De Xuat Thanh Toan</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.id }}</span>
+        </dd>
+        <dt><span>Ma De Xuat</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.maDeXuat }}</span>
+        </dd>
+        <dt><span>Ten De Xuat</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.tenDeXuat }}</span>
+        </dd>
+        <dt><span>Tu Ngay</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.tuNgay | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Den Ngay</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.denNgay | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Trang Thai Truong Phong</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.trangThaiTruongPhong }}</span>
+        </dd>
+        <dt><span>Trang Thai Phong Tai Vu</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.trangThaiPhongTaiVu }}</span>
+        </dd>
+        <dt><span>Trang Thai Ban Lanh Dao</span></dt>
+        <dd>
+          <span>{{ deXuatThanhToan.trangThaiBanLanhDao }}</span>
+        </dd>
+        <dt><span>Chiphi</span></dt>
+        <dd>
+          <span *ngFor="let chiphi of deXuatThanhToan.chiphis; let last = last">
+            <a [routerLink]="['/chi-phi', chiphi?.id, 'view']">{{ chiphi.loaiChiPhi }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Dmuc</span></dt>
+        <dd>
+          <span *ngFor="let dmuc of deXuatThanhToan.dmucs; let last = last">
+            <a [routerLink]="['/dinh-muc', dmuc?.id, 'view']">{{ dmuc.capBac }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/de-xuat-thanh-toan', deXuatThanhToan.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "name": "PhongBanNhanVien",
+  "fields": [
+    {
+      "fieldName": "maPhong",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maNhanVien",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "nhanVien",
+      "otherEntityRelationshipName": "pban",
+      "relationshipName": "nvien",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "phong_ban_nhan_vien",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210326165119"
+}

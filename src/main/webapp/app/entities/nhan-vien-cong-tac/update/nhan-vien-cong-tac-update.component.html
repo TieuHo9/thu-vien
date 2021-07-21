@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-nhan-vien-cong-tac-heading" data-cy="NhanVienCongTacCreateUpdateHeading">Thêm hoặc sửa đợt công tác của nhân viên</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maNhanVien">Mã nhân viên</label>
+          <input
+            type="text"
+            class="form-control"
+            name="maNhanVien"
+            id="field_maNhanVien"
+            data-cy="maNhanVien"
+            formControlName="maNhanVien"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_maChuyenDi">Mã chuyến đi</label>
+          <input
+            type="text"
+            class="form-control"
+            name="maChuyenDi"
+            id="field_maChuyenDi"
+            data-cy="maChuyenDi"
+            formControlName="maChuyenDi"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_soTien">Số tiền</label>
+          <input type="text" class="form-control" name="soTien" id="field_soTien" data-cy="soTien" formControlName="soTien" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_chuyencts">Chi tiết chuyến công tác</label>
+          <select class="form-control" id="field_chuyencts" data-cy="chuyenct" multiple name="chuyencts" formControlName="chuyencts">
+            <option
+              [ngValue]="getSelectedChuyenCongTac(chuyenCongTacOption, editForm.get('chuyencts')!.value)"
+              *ngFor="let chuyenCongTacOption of chuyenCongTacsSharedCollection; trackBy: trackChuyenCongTacById"
+            >
+              {{ chuyenCongTacOption.tenChuyenDi }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dinhMuc">
+      <h2 data-cy="dinhMucDetailsHeading"><span>Dinh Muc</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ dinhMuc.id }}</span>
+        </dd>
+        <dt><span>Ma Muc</span></dt>
+        <dd>
+          <span>{{ dinhMuc.maMuc }}</span>
+        </dd>
+        <dt><span>Loai Phi</span></dt>
+        <dd>
+          <span>{{ dinhMuc.loaiPhi }}</span>
+        </dd>
+        <dt><span>So Tien</span></dt>
+        <dd>
+          <span>{{ dinhMuc.soTien }}</span>
+        </dd>
+        <dt><span>Cap Bac</span></dt>
+        <dd>
+          <span>{{ dinhMuc.capBac }}</span>
+        </dd>
+        <dt><span>Cbac</span></dt>
+        <dd>
+          <span *ngFor="let cbac of dinhMuc.cbacs; let last = last">
+            <a [routerLink]="['/cap-bac', cbac?.id, 'view']">{{ cbac.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/dinh-muc', dinhMuc.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

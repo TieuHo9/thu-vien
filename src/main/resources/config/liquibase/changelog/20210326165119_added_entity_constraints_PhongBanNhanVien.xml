@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity PhongBanNhanVien.
+    -->
+    <changeSet id="20210326165119-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="phong_ban_nhan_vien_id"
+                                 baseTableName="rel_phong_ban_nhan_vien__nvien"
+                                 constraintName="fk_rel_phong_ban_nhan_vien__nvien__phong_ban_nhan_vien_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="phong_ban_nhan_vien"/>
+
+        <addForeignKeyConstraint baseColumnNames="nvien_id"
+                                 baseTableName="rel_phong_ban_nhan_vien__nvien"
+                                 constraintName="fk_rel_phong_ban_nhan_vien__nvien__nvien_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nhan_vien"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity DinhMuc.
+    -->
+    <changeSet id="20210326165122-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dinh_muc_id"
+                                 baseTableName="rel_dinh_muc__cbac"
+                                 constraintName="fk_rel_dinh_muc__cbac__dinh_muc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dinh_muc"/>
+
+        <addForeignKeyConstraint baseColumnNames="cbac_id"
+                                 baseTableName="rel_dinh_muc__cbac"
+                                 constraintName="fk_rel_dinh_muc__cbac__cbac_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cap_bac"/>
+        
+    </changeSet>
+</databaseChangeLog>
